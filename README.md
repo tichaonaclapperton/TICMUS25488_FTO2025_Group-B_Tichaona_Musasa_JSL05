@@ -2,7 +2,8 @@
 
 ## Prerequisite
 
-Before starting this challenge, ensure that you have **correctly populated your DOM elements** as per the solution in JSL04. Additionally, ensure that clicking a task should **open the modal with the relevant task details** as required in the previous challenge.
+1. Before starting this challenge, ensure that you have **correctly populated your DOM elements** as per the solution in JSL04. Additionally, ensure that clicking a task should **open the modal with the relevant task details** as required in the previous challenge.
+2. Check the project user stories in your student dashboard, make sure you understand what is required for each feature.
 
 ## Overview
 
