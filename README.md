@@ -29,7 +29,7 @@ In this project, you will implement a task management system where **tasks are p
 
 ## Design & Responsiveness
 
-- The **"Add New Task" modal** should match the **Figma design**, including mobile-responsive behavior.
+- The **"Add New Task" modal** should match the [Figma design](https://www.figma.com/design/y7bFCUYL5ZHfPeojACBXg2/Challenges-%7C-JSL?node-id=0-1&p=f&t=NNqgDPlU1PNLLh8i-0), including mobile-responsive behavior.
 - Ensure that the modal and task board are **fully responsive** and function properly on both desktop and mobile devices.
 - The "Add Task" button should **transform** appropriately on mobile devices to match the Figma design.
 
