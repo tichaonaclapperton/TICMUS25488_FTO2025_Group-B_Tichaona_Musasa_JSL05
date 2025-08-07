@@ -19,6 +19,9 @@ const taskDiscriptionInput = document.getElementById("taskDescriptionInput");
 const closeModalBtn = document.getElementById("close-modal");
 /** @type {HTMLDivElement} */
 const taskStatusInput = document.getElementById("taskStatusInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+/** @type {HTMLDivElement} */
+const saveTaskBtn = document.getElementById("saveTaskBtn");
 
 // Render all tasks to their respective containers.
 
@@ -64,6 +67,34 @@ const updateColumnHeaders = (tasks) => {
 		).textContent = `${status.toUpperCase()} (${count})`;
 	});
 };
+
+saveTaskBtn.addEventListener("click", () => {
+	const title = taskInput.value.trim();
+	const description = taskDiscriptionInput.value.trim();
+	const status = taskStatusInput.value;
+
+	if (!title) {
+		alert("Task title cannot be empty.");
+		return;
+	}
+
+	
+	if (selectedTask) {
+		// Edit existing task
+		const oldTitle = selectedTask.textContent;
+		const index = tasks.findIndex((t) => t.title === oldTitle);
+		if (index !== -1) {
+			tasks[index] = { title, description, status };
+		}
+	} else {
+		// Add new task
+		tasks.push({ title, description, status });
+	}
+	saveTasksToLocalStorage(tasks);
+	renderTasks(tasks);
+  modal.style.display = "none";
+	selectedTask = null;
+});
 
 //  Function linked to the modal that gives modal information from the data given
 
