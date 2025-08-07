@@ -102,6 +102,10 @@
   .hidden{
     display: none;
   }
+
+  #addTaskBtn{
+    border: none;
+  }
   
   /* ===============
      Main Layout
@@ -327,4 +331,21 @@
     .column-div {
       padding: 24px;
     }
+    .desktop-view{
+        display: none;
+       }
+       .hidden{
+         display: flex;
+         width: 33px;
+         height: 33px;
+         margin-right: 18px;
+         top: 0;
+         font-style: bold;
+         position: absolute;
+         margin-top: 15px;
+         align-items: center;
+         padding: 0;
+         padding-left: 12px;
+         font-weight: 700;
+       }
   }
