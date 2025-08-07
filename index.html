@@ -1,0 +1,113 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./modal.css" />
+		<link rel="stylesheet" href="./styles.css" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/favicon.svg"
+		/>
+		<script defer src="./scripts.js"></script>
+		<title>Kanban Task Management</title>
+	</head>
+
+	<body>
+		<!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
+		<nav class="side-bar" id="side-bar-div">
+			<div id="side-logo-div">
+				<img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
+			</div>
+
+			<div class="boards-nav-links-div" id="boards-nav-links-div">
+				<h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+				<button class="board-btn">Launch Career</button>
+			</div>
+		</nav>
+
+		<!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
+		<div id="layout">
+			<header id="header" class="sticky-header">
+				<div class="header-name-div">
+					<img
+						src="./assets/favicon.svg"
+						alt="logo-mobile"
+						class="logo-mobile"
+					/>
+					<h2 class="header-board-name" id="header-board-name">
+						Launch Career
+					</h2>
+				</div>
+			</header>
+
+			<div class="container">
+				<main class="card-column-main">
+					<!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
+					<div class="column-div" data-status="todo">
+						<div id="todo-head-div" class="column-head-div">
+							<span class="dot" id="todo-dot"></span>
+							<h4 id="todoText" class="columnHeader"></h4>
+						</div>
+						<!-- Tasks container for TODO -->
+						<div class="tasks-container" data-status="todo">
+							<!-- tasks will be dynamically added -->
+						</div>
+					</div>
+					<!-- DOING Column -->
+					<div class="column-div" data-status="doing">
+						<div id="doing-head-div" class="column-head-div">
+							<span class="dot" id="doing-dot"></span>
+							<h4 id="doingText" class="columnHeader"></h4>
+						</div>
+						<!-- Tasks container for DOING -->
+						<div class="tasks-container" data-status="doing">
+							<!-- tasks will be dynamically added -->
+						</div>
+					</div>
+					<!-- DONE Column -->
+					<div class="column-div" data-status="done">
+						<div id="done-head-div" class="column-head-div">
+							<span class="dot" id="done-dot"></span>
+							<h4 id="doneText" class="columnHeader"></h4>
+						</div>
+						<!-- Tasks container for DONE -->
+						<div class="tasks-container" data-status="done">
+							<!-- tasks will be dynamically added -->
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
+
+		<!-- modal structure and the inputs -->
+
+		<div id="modal" class="modal" style="display: none">
+			<!--hiding the modal from the page -->
+			<div id="modal-content" class="modal-content">
+				<button id="close-modal" class="close-btn">✖</button>
+				<h1 id="modal-heading">Task</h1>
+
+				<!-- all the inputs for the modal -->
+
+				<label>Title</label><br />
+				<input type="text" id="taskTitleInput" /><br /><br />
+				<label>Description</label><br />
+				<textarea id="taskDescriptionInput" rows="6"></textarea><br /><br />
+
+				<label>Status</label><br />
+				<select id="taskStatusInput">
+					<option value="doing">Doing</option>
+					<option value="done">Done</option>
+					<option value="todo">Todo</option></select
+				><br /><br />
+			</div>
+		</div>
+		<script type="module" src="./scripts.js"></script>
+	</body>
+</html>
