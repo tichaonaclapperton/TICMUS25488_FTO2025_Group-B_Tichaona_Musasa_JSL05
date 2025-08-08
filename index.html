@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -14,7 +15,6 @@
 			sizes="32x32"
 			href="./assets/favicon.svg"
 		/>
-		<script defer src="./scripts.js"></script>
 		<title>Kanban Task Management</title>
 	</head>
 
@@ -43,7 +43,7 @@
 					<h2 class="header-board-name" id="header-board-name">
 						Launch Career
 					</h2>
-                    <button id="addTaskBtn">
+					<button id="addTaskBtn">
 						<span class="desktop-view">+ Add New Task</span
 						><span class="hidden">+</span>
 					</button>
@@ -94,15 +94,25 @@
 		<div id="modal" class="modal" style="display: none">
 			<!--hiding the modal from the page -->
 			<div id="modal-content" class="modal-content">
-				<button id="close-modal" class="close-btn">✖</button>
+				<button id="close-modal" class="close-btn">&times;</button>
 				<h1 id="modal-heading">Task</h1>
 
 				<!-- all the inputs for the modal -->
 
 				<label>Title</label><br />
-				<input type="text" id="taskTitleInput" /><br /><br />
+				<input
+					type="text"
+					id="taskTitleInput"
+					required
+					placeholder="e.g. Take chilled break"
+				/><br /><br />
 				<label>Description</label><br />
-				<textarea id="taskDescriptionInput" rows="6"></textarea><br /><br />
+				<textarea
+					id="taskDescriptionInput"
+					rows="6"
+					placeholder="e.g Pet your dog, have a cup of coffee,dance to your favourite song and come back to crush this challenge."
+				></textarea
+				><br /><br />
 
 				<label>Status</label><br />
 				<select id="taskStatusInput">
@@ -110,7 +120,7 @@
 					<option value="done">Done</option>
 					<option value="todo">Todo</option></select
 				><br /><br />
-                <button id="saveTaskBtn" class="save-btn">Create Task</button>
+				<button id="saveTaskBtn" class="save-btn">Create Task</button>
 			</div>
 		</div>
 		<script type="module" src="./script.js"></script>
