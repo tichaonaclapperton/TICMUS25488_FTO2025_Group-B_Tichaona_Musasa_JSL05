@@ -5,8 +5,6 @@ import { initialTasks } from "./initialData.js";
  * The currently selected task element for editing.
  */
 
-let selectedTask = null;
-
 // *****getting DOM elements*******
 
 /** @type {HTMLDivElement} */
@@ -22,6 +20,12 @@ const taskStatusInput = document.getElementById("taskStatusInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 /** @type {HTMLDivElement} */
 const saveTaskBtn = document.getElementById("saveTaskBtn");
+
+let selectedTask = null;
+
+addTaskBtn.addEventListener("click", () => {
+	openModal(null);
+});
 
 // Render all tasks to their respective containers.
 
@@ -78,7 +82,6 @@ saveTaskBtn.addEventListener("click", () => {
 		return;
 	}
 
-	
 	if (selectedTask) {
 		// Edit existing task
 		const oldTitle = selectedTask.textContent;
@@ -92,20 +95,45 @@ saveTaskBtn.addEventListener("click", () => {
 	}
 	saveTasksToLocalStorage(tasks);
 	renderTasks(tasks);
-  modal.style.display = "none";
+	modal.style.display = "none";
 	selectedTask = null;
 });
 
 //  Function linked to the modal that gives modal information from the data given
 
 function openModal(taskElement) {
-	selectedTask = taskElement;
-	taskInput.value = taskElement.textContent;
-	taskDiscriptionInput.value = taskElement.dataset.description;
-	taskStatusInput.value = taskElement.dataset.status;
+	const heading = document.getElementById("modal-heading");
 
-	// changing modal from hidding to display
+	selectedTask = taskElement;
+
+	if (taskElement) {
+		taskInput.value = taskElement.textContent;
+		taskDiscriptionInput.value = taskElement.dataset.description;
+		taskStatusInput.value = taskElement.dataset.status;
+
+		heading.textContent = "Edit Task";
+		saveTaskBtn.textContent = "Update Task";
+	} else {
+		taskInput.value = "";
+		taskDiscriptionInput.value = "";
+		taskStatusInput.value = "todo";
+		modal.style.display = "flex";
+
+		heading.textContent = "Add New Task";
+		saveTaskBtn.textContent = "Create Task";
+	}
+
 	modal.style.display = "flex";
+}
+
+function saveTasksToLocalStorage(tasks) {
+	localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+let tasks = getTasksFromLocalStorage();
+function getTasksFromLocalStorage() {
+	const saved = localStorage.getItem("tasks");
+	return saved ? JSON.parse(saved) : [];
 }
 
 // The function that closes the modal when the close button is clicked
@@ -124,7 +152,10 @@ window.addEventListener("click", function (event) {
 });
 
 // making sure that javascript runs after DOM is ready
-
 document.addEventListener("DOMContentLoaded", () => {
-	renderTasks(initialTasks);
+	const saved = getTasksFromLocalStorage();
+	if (saved.length === 0) {
+		saveTasksToLocalStorage(initialTasks); // Optional fallback
+	}
+	renderTasks(getTasksFromLocalStorage());
 });
