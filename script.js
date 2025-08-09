@@ -1,6 +1,12 @@
 import { initialTasks } from "./initialData.js";
 
 /**
+ * @fileoverview Task management application.
+ * This script handles creating, editing, and rendering tasks
+ * with support for saving to and retrieving from localStorage.
+ */
+
+/**
  * @type {HTMLElement|null}
  * The currently selected task element for editing.
  */
@@ -27,7 +33,11 @@ addTaskBtn.addEventListener("click", () => {
 	openModal(null);
 });
 
-// Render all tasks to their respective containers.
+/**
+ * Render all tasks into their respective status containers.
+ * @param {Array<{id:number,title:string,description:string,status:string}>} tasks - The tasks to render.
+ * @returns {void}
+ */
 
 const renderTasks = (tasks) => {
 	// Clear all existing tasks
@@ -43,6 +53,7 @@ const renderTasks = (tasks) => {
 		taskDiv.textContent = task.title;
 		taskDiv.dataset.description = task.description;
 		taskDiv.dataset.status = task.status;
+		// taskDiv.dataset.taskId = task.id;
 
 		// Add click listener to open modal for editing
 		taskDiv.addEventListener("click", function () {
@@ -72,6 +83,11 @@ const updateColumnHeaders = (tasks) => {
 	});
 };
 
+/**
+ * Handles saving a task when clicking the Save button.
+ * Updates an existing task or adds a new one.
+ */
+
 saveTaskBtn.addEventListener("click", () => {
 	const title = taskInput.value.trim();
 	const description = taskDiscriptionInput.value.trim();
@@ -82,6 +98,8 @@ saveTaskBtn.addEventListener("click", () => {
 		return;
 	}
 
+	// ****This  decides whether to edit an existing task or add a new one based on whether selectedTask exists. ******
+
 	if (selectedTask) {
 		// Edit existing task
 		const oldTitle = selectedTask.textContent;
@@ -91,7 +109,7 @@ saveTaskBtn.addEventListener("click", () => {
 		}
 	} else {
 		// Add new task
-		tasks.push({ title, description, status });
+		tasks.push({ id: Date.now(), title, description, status });
 	}
 	saveTasksToLocalStorage(tasks);
 	renderTasks(tasks);
@@ -99,11 +117,14 @@ saveTaskBtn.addEventListener("click", () => {
 	selectedTask = null;
 });
 
-//  Function linked to the modal that gives modal information from the data given
+/**
+ * Opens the task modal for adding or editing a task.
+ * @param {HTMLElement|null} taskElement - The clicked task element or null for new tasks.
+ * @returns {void}
+ */
 
 function openModal(taskElement) {
 	const heading = document.getElementById("modal-heading");
-
 	selectedTask = taskElement;
 
 	if (taskElement) {
@@ -117,33 +138,52 @@ function openModal(taskElement) {
 		taskInput.value = "";
 		taskDiscriptionInput.value = "";
 		taskStatusInput.value = "todo";
-		modal.style.display = "flex";
 
 		heading.textContent = "Add New Task";
 		saveTaskBtn.textContent = "Create Task";
 	}
-
 	modal.style.display = "flex";
 }
+
+/**
+ * Saves tasks to localStorage.
+ * @param {Array<Object>} tasks - The array of task objects to store.
+ * @returns {void}
+ */
 
 function saveTasksToLocalStorage(tasks) {
 	localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+/**
+ * Retrieves tasks from localStorage.
+ * @returns {Array<Object>} - The list of stored tasks or an empty array.
+ */
+
 let tasks = getTasksFromLocalStorage();
 function getTasksFromLocalStorage() {
-	const saved = localStorage.getItem("tasks");
-	return saved ? JSON.parse(saved) : [];
+	try {
+		const saved = localStorage.getItem("tasks");
+		return saved ? JSON.parse(saved) : [];
+	} catch (e) {
+		console.error("Error reading localStorage", e);
+		return [];
+	}
 }
 
-// The function that closes the modal when the close button is clicked
+/**
+ * Closes the modal when clicking the Close button.
+ */
 
 closeModalBtn.addEventListener("click", () => {
 	modal.style.display = "none";
 	selectedTask = null;
 });
 
-// if you click outside the modal the modal will close
+/**
+ * Closes the modal when clicking outside it.
+ * @param {MouseEvent} event
+ */
 
 window.addEventListener("click", function (event) {
 	if (event.target === modal) {
@@ -151,10 +191,11 @@ window.addEventListener("click", function (event) {
 	}
 });
 
-// making sure that javascript runs after DOM is ready
+/**
+ * Initializes the app after the DOM content is loaded.
+ */
 document.addEventListener("DOMContentLoaded", () => {
-	const saved = getTasksFromLocalStorage();
-	if (saved.length === 0) {
+	if (tasks.length === 0) {
 		saveTasksToLocalStorage(initialTasks); // Optional fallback
 	}
 	renderTasks(getTasksFromLocalStorage());
