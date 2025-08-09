@@ -88,8 +88,8 @@ h4 {
 	font-size: 1rem;
 }
 
-.desktop-view,
-.hidden {
+.desktop-view-add-task-btn,
+.mobile-view-add-task-btn {
 	position: absolute;
 	right: 0;
 	margin-right: 61px;
@@ -106,12 +106,12 @@ h4 {
 	cursor: pointer;
 }
 
-.desktop-view:hover {
+.desktop-view-add-task-btn:hover {
 	background-color: rgb(8, 0, 255);
 	font-size: 16px;
 }
 
-.hidden {
+.mobile-view-add-task-btn {
 	display: none;
 }
 
@@ -262,7 +262,7 @@ h2 {
 		height: auto;
 	}
 
-	.desktop-view {
+	.desktop-view-add-task-btn {
 		margin-top: 10px;
 	}
 
@@ -343,10 +343,10 @@ h2 {
 	.column-div {
 		padding: 24px;
 	}
-	.desktop-view {
+	.desktop-view-add-task-btn {
 		display: none;
 	}
-	.hidden {
+	.mobile-view-add-task-btn {
 		display: flex;
 		width: 33px;
 		height: 33px;
