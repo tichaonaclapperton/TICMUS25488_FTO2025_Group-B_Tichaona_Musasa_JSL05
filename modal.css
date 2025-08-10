@@ -53,8 +53,10 @@ body {
 #taskDescriptionInput,
 #taskStatusInput,
 .save-btn {
+	border-radius: 4px;
 	font-family: inherit;
 	width: 100%;
+	border-width: 1px;
 }
 #modal-heading {
 	font-size: 18px;
